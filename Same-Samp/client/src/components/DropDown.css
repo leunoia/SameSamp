@@ -1,0 +1,12 @@
+#year::placeholder{
+  font-weight: 300;
+  color: #303030;
+  font-family: arial;
+  font-size: 16px;
+}
+#duration::placeholder{
+  font-weight: 300;
+  color: #303030;
+  font-family: arial;
+  font-size: 16px;
+}

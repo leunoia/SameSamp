@@ -1,0 +1,22 @@
+.Wrapper{
+  display: flex;
+  align-items: center; 
+  justify-content: center;
+}
+
+.Results {
+  font-size: large;
+  font-weight: bold;
+  overflow-y: scroll;
+  box-shadow: 10px 12px #888888;
+  position: sticky;
+  width: 70%;
+  max-height: 30vh;
+  border-radius: 10px;
+  background-color: #bababa;
+  display: flex;
+  flex-direction: column;
+  margin-top: 0px;
+  padding-left: 10px;
+  max-height: 20vh;
+}

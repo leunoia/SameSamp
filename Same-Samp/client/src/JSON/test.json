@@ -1,0 +1,130 @@
+{
+   "songs" : 
+   [
+      {
+         "artist" : "Snow",
+         "genre" : "Hip-Hop / Rap / R&B",
+         "instrument" : "Drums",
+         "name" : "Informer",
+         "neighbors" :
+         [
+            {
+               "name" : "Patrol",
+               "weight" : "1"
+            },
+            {
+               "name" : "Scary Monsters and Nice Sprites (The Juggernaut Remix)",
+               "weight" : "1"
+            },
+            {
+               "name" : "Pigs",
+               "weight" : "2"
+            },
+            {
+               "name" : "Straight Outta Compton",
+               "weight" : "2"
+            }
+         ]
+      },
+      {
+         "artist" : "Homemade Weapons",
+         "genre" : "Electronic / Dance",
+         "instrument" : "Drums",
+         "name" : "Patrol",
+         "neighbors" :
+         [
+            {
+               "name" : "Informer",
+               "weight" : "1"
+            },
+            {
+               "name" : "Scary Monsters and Nice Sprites (The Juggernaut Remix)",
+               "weight" : "2"
+            },
+            {
+               "name" : "Pigs",
+               "weight" : "1"
+            },
+            {
+               "name" : "Straight Outta Compton",
+               "weight" : "1"
+            }
+         ]
+      },
+      {
+         "artist" : "Skrillex",
+         "genre" : "Electronic / Dance",
+         "instrument" : "Drums",
+         "name" : "Scary Monsters and Nice Sprites (The Juggernaut Remix)",
+         "neighbors" :
+         [
+            {
+               "name" : "Informer",
+               "weight" : "1"
+            },
+            {
+               "name" : "Patrol",
+               "weight" : "2"
+            },
+            {
+               "name" : "Pigs",
+               "weight" : "1"
+            },
+            {
+               "name" : "Straight Outta Compton",
+               "weight" : "1"
+            }
+         ]
+      },
+      {
+         "artist" : "Tyler the Creator",
+         "genre" : "Hip-Hop / Rap / R&B",
+         "instrument" : "Drums",
+         "name" : "Pigs",
+         "neighbors" :
+         [
+            {
+               "name" : "Informer",
+               "weight" : "2"
+            },
+            {
+               "name" : "Patrol",
+               "weight" : "1"
+            },
+            {
+               "name" : "Scary Monsters and Nice Sprites (The Juggernaut Remix)",
+               "weight" : "1"
+            },
+            {
+               "name" : "Straight Outta Compton",
+               "weight" : "2"
+            }
+         ]
+      },
+      {
+         "artist" : "N.W.A",
+         "genre" : "Hip-Hop / Rap / R&B",
+         "instrument" : "Drums",
+         "name" : "Straight Outta Compton",
+         "neighbors" :
+         [
+            {
+               "name" : "Informer",
+               "weight" : "2"
+            },
+            {
+               "name" : "Patrol",
+               "weight" : "1"
+            },
+            {
+               "name" : "Scary Monsters and Nice Sprites (The Juggernaut Remix)",
+               "weight" : "1"
+            },
+            {
+               "name" : "Pigs",
+               "weight" : "2"
+            }
+         ]
+      }
+   ]
+}
