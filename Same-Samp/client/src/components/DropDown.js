@@ -80,7 +80,7 @@ export const DropDown=({setInst, setAlg, setGenre, setYear, setDuration, setExpl
   
   return (
       <div style={{display: 'inline-block', marginTop:'25px'}}>
-        <div style={{display: 'inline-block', boxShadow: '5px 10px #888888', borderRadius: '10px'}}>
+        <div style={{display: 'inline-block', borderRadius: '10px'}}>
           <Selectable 
             width={200}
             allowClear
@@ -91,7 +91,7 @@ export const DropDown=({setInst, setAlg, setGenre, setYear, setDuration, setExpl
           />
         </div>
       
-        <div style={{position:'sticky', display: 'inline-block', boxShadow: '5px 10px #888888', borderRadius: '10px'}}>
+        <div style={{position:'sticky', display: 'inline-block', borderRadius: '10px'}}>
            <Selectable
             width={200}
             allowClear
@@ -101,7 +101,7 @@ export const DropDown=({setInst, setAlg, setGenre, setYear, setDuration, setExpl
             onChange={(values) => getInst(values)}
           />
         </div>
-        <div style={{position:'sticky', display: 'inline-block', boxShadow: '5px 10px #888888', borderRadius: '10px'}}>
+        <div style={{position:'sticky', display: 'inline-block', borderRadius: '10px'}}>
           <Selectable
             width={200}
             allowClear
@@ -111,7 +111,7 @@ export const DropDown=({setInst, setAlg, setGenre, setYear, setDuration, setExpl
             onChange={(values) => getAlg(values)}
           />
         </div>
-        <div style={{position:'sticky', display: 'inline-block', boxShadow: '5px 10px #888888', borderRadius: '10px'}}>
+        <div style={{position:'sticky', display: 'inline-block', borderRadius: '10px'}}>
           <Selectable
             width={200}
             allowClear
@@ -122,10 +122,6 @@ export const DropDown=({setInst, setAlg, setGenre, setYear, setDuration, setExpl
           />
         </div>
         <div style={{margin: '15px'}}>
-          <input id='year'style = {{fontWeight: '350', 
-            color: '#303030',
-            fontFamily: 'arial',
-            fontSize: '16px', width:'200px', backgroundColor: 'white', height: '25px', borderRadius: '5px'}} placeholder='Year'  value ={input2} onChange={(e)=> getYear(e.target.value)}/>
           <input id='duration' style = {{fontWeight: '350', 
             color: '#303030',
             fontFamily: 'arial',
@@ -139,13 +135,3 @@ export const DropDown=({setInst, setAlg, setGenre, setYear, setDuration, setExpl
 };
 
 export default DropDown;
-/*<div style={{position:'sticky', display: 'inline-block' , boxShadow: '5px 10px #888888', borderRadius: '10px'}}>
-            <Selectable 
-              width={200}
-              allowClear
-              allowRefill
-              options={year}
-              defaultValue={"Year"}
-              onChange={(values) => getYear(values)}
-            />
-        </div>*/

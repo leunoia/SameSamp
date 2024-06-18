@@ -30,12 +30,12 @@ export const Search = ({setSongs, result, isResult, setIsResult}) => {
     <div className="SearchBar">
       {isResult ? 
         (<input id="resultIn"
-          placeholder= "Type to search..."
+          placeholder= "Type name of sample..."
           value = {result}
           onChange={(e) => handleChange(input)}
       />) : 
         (<input 
-          placeholder= "Type to search..."
+          placeholder= "Type name of sample..."
           value = {input} 
           onChange={(e) => handleChange(e.target.value)}
       />)}

@@ -5,8 +5,12 @@ class GraphBuild:
     def __init__(self):
         self.storage = {}
         self.adjlist = {}
+        self.root = None
 
     def insertVertex(self,artist, name, genre, instrument, year, popularity, duration, explicit, avail_marks, playCount, grossRev, age, annualRev):
+        if self.root is None:
+            self.root = Vertex(artist, name, genre, instrument, year, popularity, duration, explicit, avail_marks, playCount, grossRev, age, annualRev)
+            self.storage[name] = self.root
         self.storage[name] = Vertex(artist,name, genre, instrument, year, popularity, duration, explicit, avail_marks,playCount, grossRev, age, annualRev)
 
     def euclideanDistance(self,first, second):
@@ -22,13 +26,14 @@ class GraphBuild:
         value = 0
         if(first.getExplicit() == second.getExplicit()):
             value += 1
-        if(first.getGenre() == second.getGenre()):
+        if(first.getGenre() != second.getGenre()):
             value += 1
         if(first.getInstrument() == second.getInstrument()):
             value += 1
         return value
     
     def formulateGraph(self):
+        count = 0
         for name1, vertex1 in self.storage.items():
             for name2, vertex2 in self.storage.items():
                 if(name1 == name2): 
@@ -37,14 +42,17 @@ class GraphBuild:
                 score = self.getScore(vertex1,vertex2)
                 dist = int(self.euclideanDistance(vertex1,vertex2))
                 #checking that score and distance meet minimum for connection
-                if dist < 50 and score > 1:
+                if dist < 5:
+                    count += 1
+                if dist < 15 and score > 2:
                     dist = dist * (1 / score)
+                    #print(f"dist: {dist}")
                     if name1 in self.adjlist:
                         self.adjlist[vertex1.name].append((vertex2.name, dist))
                     elif name1 not in self.adjlist:
-                        print(vertex1.name)
                         self.adjlist[vertex1.name] = []
                         self.adjlist[vertex1.name].append((vertex2.name, dist))
+        print(f"count:", count)
 
               
     def relaxer(self, pv, dv, v, u, weight):

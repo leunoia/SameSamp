@@ -8,12 +8,11 @@
   font-size: large;
   font-weight: bold;
   overflow-y: scroll;
-  box-shadow: 10px 12px #888888;
   position: sticky;
   width: 70%;
   max-height: 30vh;
   border-radius: 10px;
-  background-color: #bababa;
+  background-color: #FFFFFF;
   display: flex;
   flex-direction: column;
   margin-top: 0px;

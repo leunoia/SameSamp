@@ -13,8 +13,7 @@ input{
   width: 70%;
   height: 5vh; 
   border-radius: 10px;
-  background-color: #bababa;
-  box-shadow: 5px 10px #888888;
+  background-color: #FFFFFF;
 }
 
 input:focus{
