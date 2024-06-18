@@ -6,7 +6,7 @@ Click picture for youtube video explaination:
 
 ## Web Application
 
-Introducing SameSamp, a revolutional application that allows music producers and record labels to select froma list of popular samples and select one they plan to use in their next song. Once you have filled out the rest of the information about your song you will be generated a graph of songs that are we determine to be similar by using our custom vertex connection algorithm. You can then look over the list of songs and see how well they performed in the market to gauge if it is worth paying to clear the sample.
+Introducing SameSamp, a web application that allows music producers and record labels to select from a list of popular samples they plan to use in their next song. Get insights on how other songs that used the same sample performed and decide if its worth paying to clear that sample. 
 
 ### Same-Samp/client
 
