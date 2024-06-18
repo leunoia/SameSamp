@@ -6,11 +6,11 @@ Click picture for youtube video explaination:
 
 ## Web Application
 
-Introducing SameSamp, a web application that allows music producers and record labels to select from a list of popular samples they plan to use in their next song. Get insights on how other songs that used the same sample performed and decide if its worth paying to clear that sample. 
+Introducing SameSamp, a web application that helps music producers and record labels decide if a sample is worth using in their song. Gain insights on how similar songs with the same sample performed.
 
 ### Same-Samp/client
 
-Client side where all the react application is hosted.
+React client side
 
 To test client side follow these steps:
 
@@ -37,7 +37,7 @@ Make sure you have Node.js and npm installed on your system before running the a
 
 ### Same-Samp/Backend
 
-For this specific project, the backend is built with Flask, a Python web framework. The server receives requests to generate a new graph and creates a new graph object. It then runs the select algorithm on the graph to determine the most similar songs. The results are displayed, providing users with a list of songs that are deemed similar based on the custom vertex connection algorithm.
+The backend is built with Flask, a Python web framework. The server receives requests to generate a new graph and creates a new graph object. It then runs the selected algorithm on the graph to determine the most similar songs. The results are displayed, providing users with a list of songs that are deemed similar. 
 
 To test client side follow these steps:
 1. Open a terminal or command prompt *If you want to run with client make sure to open a NEW terminal*.
@@ -53,12 +53,12 @@ To test client side follow these steps:
 
 #### Graph Class
 
-The Graph class in the Same-Samp/Backend directory is responsible for representing the graph structure used in the application. It provides methods for adding vertices, adding edges between vertices, and performing operations on the graph. Additionally in the graph are the two algorithms: Djikstra's and BFS which can be called after instatiated a graph based of the sample selection. The connections of the graph are made by the following calculation/algorithm below
+The Graph class in the Same-Samp/Backend directory is responsible for representing the graph structure. It provides methods for adding vertices, adding edges between vertices, and other operations on the graph. Additionally in the graph are the two algorithms: Djikstra's and BFS which can be called after instatiated a graph based of the sample selection. The edges of the graph are made by the following calculation below
 ![IMAGE ALT TEXT HERE](weight_eq.PNG)
 
 ## Dataset
 
-The dataset used in this project was made by combining data scraped from [WhoSampled's](https://www.whosampled.com/) top sampled songs list. After scraping all of the songs that used the top 20 most popular samples, the data was used to call spotify's api to get different metrics about the songs. In total, there are around 75k songs. 
+The dataset used in this project was made by combining data scraped from [WhoSampled's](https://www.whosampled.com/) top sampled songs list and the spotify API. After scraping all of the songs that used the top 20 most popular samples, the data was used to call [Spotify's API](https://developer.spotify.com/documentation/web-api) to get different metrics about the songs. In total, there are around 75k songs. 
 
 | Artist              | SongName                      | SpotifyID           | Genre                    | Year | Popularity | Duration (ms) | Explicit | Avail_Markets    | PlayCount | GrossRev | Age | annualRev |
 |---------------------|-------------------------------|---------------------|--------------------------|------|------------|---------------|----------|------------------|-----------|----------|-----|-----------|
@@ -74,11 +74,11 @@ Calls the spotify API and then iterates over the list of songs scraped from WhoS
 
 The data cleaner is responsible for preprocessing and cleaning the collected data. This step involves tasks such as removing duplicates, handling missing values, normalizing data, and transforming it into a suitable format for further analysis.
 
-## Random Forest Regression Model
+## Random Forest Regression Model (Work In Progress)
 
 This is a regression model that is using both numerical and categorical values to predict the revenue of a new song that was inputted into the graph. The categorical values are:
-1. **Genre:** This represents the genre of the songs that sampled other songs. For example, hip-hop is notorious for being successful when sampling other songs
-2. **Instrument:** This represents the type of instrument that was sampled from the original song. The reason this is important is because vocal samples for example can be much more expensive but also can make a song a lot more successful when sampled.
+1. **Genre:** This represents the genre of the songs that sampled other songs. For example, hip-hop is notorious for sampling other older funk / soul songs.
+2. **Instrument:** This indicates the type of instrument sampled from the original song. This is important because, for example, vocal samples can be more expensive to clear but can also make a song significantly more successful.
 
 
 ### Setting up the Environment
