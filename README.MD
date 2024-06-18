@@ -2,7 +2,7 @@
 
 # SameSamp
 Click picture for youtube video explaination:
-[![IMAGE ALT TEXT HERE](SameSampLogo.jpg)](https://youtu.be/ZmxhAfImc4M?si=P81RUClfE-SMy86U)
+[![IMAGE ALT TEXT HERE](/samesamplogo222.png)](https://youtu.be/ZmxhAfImc4M?si=P81RUClfE-SMy86U)
 
 ## Web Application
 
@@ -56,6 +56,15 @@ To test client side follow these steps:
 The Graph class in the Same-Samp/Backend directory is responsible for representing the graph structure used in the application. It provides methods for adding vertices, adding edges between vertices, and performing operations on the graph. Additionally in the graph are the two algorithms: Djikstra's and BFS which can be called after instatiated a graph based of the sample selection. The connections of the graph are made by the following calculation/algorithm below
 ![IMAGE ALT TEXT HERE](weight_eq.PNG)
 
+## Dataset
+
+The dataset used in this project was made by combining data scraped from [WhoSampled's](https://www.whosampled.com/) top sampled songs list. After scraping all of the songs that used the top 20 most popular samples, the data was used to call spotify's api to get different metrics about the songs. In total, there are around 75k songs. 
+
+| Artist              | SongName                      | SpotifyID           | Genre                    | Year | Popularity | Duration (ms) | Explicit | Avail_Markets    | PlayCount | GrossRev | Age | annualRev |
+|---------------------|-------------------------------|---------------------|--------------------------|------|------------|---------------|----------|------------------|-----------|----------|-----|-----------|
+| N.W.A.              | Straight Outta Compton        | 6...W | Hip-Hop / Rap / R&B      | 1988 | 74         | 258687        | True     | ['AR'...]        | 4922929   | 9845     | 35  | 12300.625  |
+| Tyler, The Creator  | Pigs                          | 5...J | Hip-Hop / Rap / R&B      | 2013 | 54         | 254733        | True     | ['AR', US ...]   | 8325632   | 16651    | 10  | 2081.375  |
+| Skrillex            | Scary Monsters and Nice Sprites| 4...0 | Electronic / Dance       | 2011 | 61         | 243353        | False    | ['AT', US', ...] | 6751477   | 13502    | 12  | 1687.75   |
 
 ## Spotify Data Collector
 
