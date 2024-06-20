@@ -1,5 +1,7 @@
-from Vertex import Vertex
 import math
+import heapq
+from Vertex import Vertex
+
 
 class GraphBuild:
     def __init__(self):
@@ -10,8 +12,9 @@ class GraphBuild:
     def insertVertex(self,artist, name, genre, instrument, year, popularity, duration, explicit, avail_marks, playCount, grossRev, age, annualRev):
         if self.root is None:
             self.root = Vertex(artist, name, genre, instrument, year, popularity, duration, explicit, avail_marks, playCount, grossRev, age, annualRev)
-            self.storage[name] = self.root
-        self.storage[name] = Vertex(artist,name, genre, instrument, year, popularity, duration, explicit, avail_marks,playCount, grossRev, age, annualRev)
+            self.storage[self.root.name] = self.root
+        tempName = artist + " - " + name    
+        self.storage[tempName] = Vertex(artist,name, genre, instrument, year, popularity, duration, explicit, avail_marks,playCount, grossRev, age, annualRev)
 
     def euclideanDistance(self,first, second):
          popularity = math.pow(first.popularity - second.popularity, 2)
@@ -44,8 +47,10 @@ class GraphBuild:
                 #checking that score and distance meet minimum for connection
                 if dist < 5:
                     count += 1
-                if dist < 15 and score > 2:
-                    dist = dist * (1 / score)
+                if dist < 15 and 1 < score:
+                    dist = (dist * (1 / score)) * 10
+                    if dist <= 0:
+                        continue
                     #print(f"dist: {dist}")
                     if name1 in self.adjlist:
                         self.adjlist[vertex1.name].append((vertex2.name, dist))
@@ -56,79 +61,76 @@ class GraphBuild:
 
               
     def relaxer(self, pv, dv, v, u, weight):
-        if(dv[v]> dv[u] + weight):
+        if dv[v] > dv[u] + weight:
             dv[v] = dv[u] + weight
             pv[v] = u
-        return pv,dv
+        return pv, dv
 
     def getMin(self, S, dv):
-        min_int = 2147483647
-        min = ''
+        min_int = float('inf')
+        min_node = None
         for name, dist in dv.items():
-            if name not in S:
-                if dist < min_int:
-                    min = name
-                    min_int = dist
-        return min
+            if name not in S and dist < min_int:
+                min_node = name
+                min_int = dist
+        return min_node
 
-    def dijkstra(self, root):
+    def dijkstra(self, root, max):
         S = set()
-        V_S = set()
         pv = {}
         dv = {}
         curr = root
-        S.add(root)
 
-        # setting the initial distance for all nodes to "infinity"
-        for name,neighbors in self.adjlist.items():
-            dv[name] = 2147483647
-            pv[name] = ''
-            if name != root:
-                V_S.add(name)
+        for name in self.adjlist.keys():
+            dv[name] = float('inf')
+            pv[name] = None
 
-        # setting root distance to zero
         dv[root] = 0
 
-        while(len(V_S) != 0):
+        while len(S) < len(self.adjlist):
+            curr = self.getMin(S, dv)
+            if curr is None:
+                break
 
-            if curr in self.adjlist.keys():
-                for i in range(0, len(self.adjlist[curr])):
-                    neighbrname = self.adjlist[curr][i][0]
-                    weight = self.adjlist[curr][i][1]
-                    pv, dv = self.relaxer(pv, dv, neighbrname, curr,  weight)
+            S.add(curr)
 
-                if(curr != root):
-                    S.add(curr)
-                    V_S.remove(curr)
+            for neighbor, weight in self.adjlist[curr]:
+                pv, dv = self.relaxer(pv, dv, neighbor, curr, weight)
 
-                curr = self.getMin(S, dv)
+        sorted_distances = sorted([(name, dv[name]) for name in dv if name != root and dv[name] != float('inf')], key=lambda x: x[1])
+        result = [{"name": name, "weight": dist} for name, dist in sorted_distances[:max]]
 
-                if(curr == ''):
-                    break
-        
-        return S, dv, pv
+        return result
 
-    def BFS(self,root, max):
-        visited = []
-        q = []
-        counter = 0
-        if root in self.adjlist.keys():
-            visited.append((root, 0))
-            q.append(root)
-            while q and counter < max:
-                curr  = q.pop(0)
-                print(len(q))
-                for nhbr,weight in self.adjlist[curr]:
-                    if nhbr not in visited:
-                        dist = self.euclideanDistance(self.storage[root], self.storage[nhbr])
-                        visited.append({"name": nhbr,
-                                        "weight": weight})
-                        q.append(nhbr)
-                        counter += 1
-        return visited
+
+    def BFS(self, root, max):
+        visited = set()
+        result = []
+        queue = [(root, 0)]  # (node, cumulative_distance)
+
+        while queue and len(result) < max:
+            curr, curr_dist = queue.pop(0)
+
+            if curr not in visited:
+                visited.add(curr)
+                if curr != root:
+                    result.append({"name": curr, "weight": curr_dist})
+
+                for neighbor, weight in self.adjlist[curr]:
+                    if neighbor not in visited:
+                        new_dist = curr_dist + weight
+                        queue.append((neighbor, new_dist))
+
+        # Sort the results to get the closest 'max' elements if necessary
+        result = sorted(result, key=lambda x: x['weight'])[:max]
+        return result
     
+    def clear(self):
+        self.adjlist = {}
+        
     def getAdjList(self):
         return self.adjlist
+    
     def getStorage(self):
         return self.storage
 

@@ -101,11 +101,9 @@ def build_graph_response(graph_copy):
 
 def run_algorithm(graph_copy, algo):
     if algo == "Dijkstra":
-        S, dv, pv = graph_copy.dijkstra("userSong")
-        algoDict = {val: (int(dv[val]), pv[val]) for val in S}
-        return algoDict
+        return graph_copy.dijkstra("user - song", 15)
     elif algo == "Breadth First Search":
-        return graph_copy.BFS("userSong", 15)
+        return graph_copy.BFS("user - song", 15)
 
 app = Flask(__name__)
 CORS(app)
@@ -123,8 +121,8 @@ def get_algorithm():
         data = json.loads(user_data)
         sample = data[0]
         graph_copy = select_graph(sample)  # Helper function to select graph
-        
-        graph_copy.insertVertex("userVertex", "userSong", data[3], data[1], 2024, 50, int(data[5])*1000, data[6], "US", 50000, (50000 * 0.002), 1, (50000 * 0.002))
+        graph_copy.clear()
+        graph_copy.insertVertex("user", "song", data[3], data[1], 2024, 50, int(data[5])*1000, data[6], "US", 50000, (50000 * 0.002), 1, (50000 * 0.002))
         graph_copy.formulateGraph()
         
         graph = build_graph_response(graph_copy)

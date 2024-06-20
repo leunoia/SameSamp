@@ -1,6 +1,6 @@
 class Vertex:
   def __init__(self, artist, name, genre, instrument, year, popularity, duration, explicit, avail_marks, playCount, grossRev, age, annualRev):
-    self.name = name
+    self.name = artist + " - " + name
     self.artist = artist
     self.genre = genre
     self.instrument = instrument

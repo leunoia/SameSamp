@@ -1,10 +1,11 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import sslogo from './samesamplogo222.png';
 import Search from './components/Search.js';
 import SearchResults from './components/SearchResults.js';
 import DropDown from './components/DropDown.js';
 import Graph from 'vis-react';
+import SongList from './components/SongList'; // Import the new component
 
 const genres = {
   "Electronic / Dance": 0,
@@ -13,12 +14,12 @@ const genres = {
   "Other": 3,
   "SoundTrack / Library": 4,
   "Soul / Funk / Disco": 5,
-  "Jazz / Blues": 6, 
+  "Jazz / Blues": 6,
   "Reggae / Dub": 7,
   "Country / Folk": 8,
   "World / Latin": 9,
   "Classical": 10,
-}
+};
 
 function convertGraphFormat(graphData) {
   const nodes = [];
@@ -43,7 +44,7 @@ function convertGraphFormat(graphData) {
       links.push({
         from: nodeIdMap[song.name],
         to: nodeIdMap[neighbor.name],
-        value: neighbor.weight
+        value: neighbor.weight,
       });
     });
   });
@@ -74,33 +75,33 @@ function App() {
   const [isResult, setIsResult] = useState(false);
   const [explicit, setExplicit] = useState('');
   const [duration, setDuration] = useState('');
-  const [userData, setUserData] = useState([]);
   const [graph, setGraph] = useState({ nodes: [], edges: [] });
   const [graphReady, setGraphReady] = useState(false); // State to track if the graph data is ready
+  const [algoResults, setAlgoResults] = useState([]); // State to store algorithm results
 
   var options = {
     nodes: {
-      shape: "dot",
+      shape: 'dot',
       scaling: {
         min: 10,
         max: 30,
       },
       font: {
         size: 30,
-        face: "Tahoma",
+        face: 'Tahoma',
       },
     },
     edges: {
-      arrows:{
+      arrows: {
         to: false,
       },
       width: 0.15,
-      color: { inherit: "from" },
+      color: { inherit: 'from' },
     },
     physics: {
       stabilization: false,
       barnesHut: {
-        gravitationalConstant: -8000,
+        gravitationalConstant: -2000,
         springConstant: 0.01,
         springLength: 300,
       },
@@ -112,17 +113,14 @@ function App() {
   };
 
   const events = {
-    select: function(event) {
+    select: function (event) {
       var { nodes, edges } = event;
-    }
+    },
   };
 
-  const submitVertex = async () => {
+  const submitVertex = async (userData) => {
     try {
-      // Convert userData to query parameters
       const queryParams = new URLSearchParams({ userData: JSON.stringify(userData) }).toString();
-
-      // Send userData with GET request to the /algorithm endpoint
       const response = await fetch(`http://localhost:5000/algorithm?${queryParams}`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -133,31 +131,23 @@ function App() {
       }
 
       const data = await response.json();
-      console.log("Data: ", data);
+      console.log('Data: ', data);
       const convertedGraph = convertGraphFormat(data.graph);
-      console.log("Converted Graph: ", convertedGraph); 
-      setGraph(convertedGraph); // Update the graph state with the converted graph data
-      setGraphReady(true); // Set graphReady to true to trigger rendering of the Graph component
+      console.log('Converted Graph: ', convertedGraph);
+      setGraph(convertedGraph); 
+      setGraphReady(true); 
+      setAlgoResults(data.algo); 
     } catch (error) {
       console.error(error);
     }
   };
 
-  // const handleAddVertex = () => {
-  //   if (result && instrument && year && genre && algorithm && duration && explicit) {
-  //     setUserData([result, instrument, 2024, genre, algorithm, duration, explicit]);
-  //   } else {
-  //     alert('Fill in all inputs!');
-  //   }
-  // };
-
   const canSearch = () => {
     if (result && instrument && genre && algorithm && duration && explicit) {
-      console.log(`result: ${result}`);
+      const userData = [result, instrument, 2024, genre, algorithm, duration, explicit];
       console.log(`userData: ${userData}`);
-      setUserData([result, instrument,2024, genre, algorithm, duration, explicit]);
-      submitVertex();
-      setGraphReady(false); // Reset graphReady to false before making a new request
+      submitVertex(userData);
+      setGraphReady(false);
     } else {
       alert('Fill in all inputs!');
     }
@@ -180,13 +170,18 @@ function App() {
           </div>
         </div>
         {graphReady && (
-          <div className="graph">
-            <Graph
-              graph={graph}
-              options={options}
-              events={events}
-              getNetwork={Graph.getNetwork}
-            />
+          <div className="results-container">
+            <div className="graph">
+              <Graph
+                graph={graph}
+                options={options}
+                events={events}
+                getNetwork={Graph.getNetwork}
+              />
+            </div>
+            <div className="song-list-container">
+              <SongList songs={algoResults} /> {/* Pass the algoResults to the SongList component */}
+            </div>
           </div>
         )}
       </div>
@@ -195,4 +190,3 @@ function App() {
 }
 
 export default App;
-
