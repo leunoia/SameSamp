@@ -120,7 +120,7 @@ def get_algorithm():
     if user_data:
         data = json.loads(user_data)
         sample = data[0]
-        graph_copy = select_graph(sample)  # Helper function to select graph
+        graph_copy = select_graph(sample)  
         graph_copy.clear()
         graph_copy.insertVertex("user", "song", data[3], data[1], 2024, 50, int(data[5])*1000, data[6], "US", 50000, (50000 * 0.002), 1, (50000 * 0.002))
         graph_copy.formulateGraph()

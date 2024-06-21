@@ -41,30 +41,35 @@ button {
   align-items: flex-start;
   gap: 20px;
   width: 100%;
+  margin-top: 20px; 
 }
 
 .graph {
-  background-color: #717171 ;
-  color: #424242;
-  height: 40vh;
+  background-color: #717171;
+  color: white;
+  height: 45vh;
   width: 70%;
   border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px; 
-  margin-bottom: 20px; 
+  border: 5px solid black; 
 }
 
 .song-list-container {
   width: 30%;
+  display: flex;
+  align-items: center; 
+  justify-content: center;
 }
 
 .song-list {
   padding: 20px;
-  background-color: white;
+  background-color: #717171;
   border-radius: 10px;
+  color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border: 5px solid black; 
 }
 
 .song-list h3 {
@@ -79,4 +84,12 @@ button {
 .song-list li {
   margin-bottom: 5px;
 }
+
+.SongTitle {
+  font-weight: bold;
+  font-size: 30pt;
+  text-decoration: underline;
+}
+
+
 

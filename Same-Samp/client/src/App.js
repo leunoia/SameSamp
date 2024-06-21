@@ -180,7 +180,7 @@ function App() {
               />
             </div>
             <div className="song-list-container">
-              <SongList songs={algoResults} /> {/* Pass the algoResults to the SongList component */}
+              <SongList songs={algoResults} />
             </div>
           </div>
         )}
